@@ -1,0 +1,39 @@
+class Solution {
+    public int[] findEvenNumbers(int[] digits) {
+        int[] digitCount = new int[10];
+        for (int digit : digits) {
+            digitCount[digit]++;
+        }
+        
+        List<Integer> resultList = new ArrayList<>();
+      
+        for (int i = 100; i < 1000; i += 2) {
+            int[] currentCount = new int[10];
+            int temp = i;
+           
+            while (temp > 0) {
+                currentCount[temp % 10]++;
+                temp /= 10;
+            }
+            
+            boolean canForm = true;
+            for (int j = 0; j < 10; j++) {
+                if (currentCount[j] > digitCount[j]) {
+                    canForm = false;
+                    break;
+                }
+            }
+           
+            if (canForm) {
+                resultList.add(i);
+            }
+        }
+ 
+        int[] result = new int[resultList.size()];
+        for (int i = 0; i < resultList.size(); i++) {
+            result[i] = resultList.get(i);
+        }
+        
+        return result;
+    }
+}
